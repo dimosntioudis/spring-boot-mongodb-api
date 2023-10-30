@@ -13,18 +13,28 @@ public class Annotation {
   private Double second;
   private String description;
   private String dropdownValue;
+  private String videoId;
 
   public Annotation() {
 
   }
 
   public Annotation(Rectangle rectangle, Long frameNumber, Double second,
-      String description, String dropdownValue) {
+      String description, String dropdownValue, String videoId) {
     this.rectangle = rectangle;
     this.frameNumber = frameNumber;
     this.second = second;
     this.description = description;
     this.dropdownValue = dropdownValue;
+    this.videoId = videoId;
+  }
+
+  public String getVideoId() {
+    return videoId;
+  }
+
+  public void setVideoId(String videoId) {
+    this.videoId = videoId;
   }
 
   public String getId() {

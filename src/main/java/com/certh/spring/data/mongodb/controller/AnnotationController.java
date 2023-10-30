@@ -59,7 +59,7 @@ public class AnnotationController {
     try {
       Annotation _annotations = annotationRepository.save(
           new Annotation(annotation.getRectangle(), annotation.getFrameNumber(),
-              annotation.getSecond(), annotation.getDescription(), annotation.getDropdownValue()));
+              annotation.getSecond(), annotation.getDescription(), annotation.getDropdownValue(), annotation.getVideoId()));
       return new ResponseEntity<>(_annotations, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
