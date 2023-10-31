@@ -1,6 +1,6 @@
 package com.certh.spring.data.mongodb.controller;
 
-import com.certh.spring.data.mongodb.model.Video;
+import com.certh.spring.data.mongodb.models.Video;
 import com.certh.spring.data.mongodb.repository.VideoRepository;
 import java.util.ArrayList;
 import java.util.List;

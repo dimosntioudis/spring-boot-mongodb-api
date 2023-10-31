@@ -1,4 +1,4 @@
-package com.certh.spring.data.mongodb.model;
+package com.certh.spring.data.mongodb.models;
 
 public class Rectangle {
   private Long x;

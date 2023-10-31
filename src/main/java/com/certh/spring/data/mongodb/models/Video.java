@@ -1,4 +1,4 @@
-package com.certh.spring.data.mongodb.model;
+package com.certh.spring.data.mongodb.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

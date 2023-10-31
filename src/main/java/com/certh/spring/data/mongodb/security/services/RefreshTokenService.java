@@ -1,7 +1,7 @@
 package com.certh.spring.data.mongodb.security.services;
 
 import com.certh.spring.data.mongodb.exception.TokenRefreshException;
-import com.certh.spring.data.mongodb.model.RefreshToken;
+import com.certh.spring.data.mongodb.models.RefreshToken;
 import com.certh.spring.data.mongodb.repository.RefreshTokenRepository;
 import com.certh.spring.data.mongodb.repository.UserRepository;
 import java.time.Instant;

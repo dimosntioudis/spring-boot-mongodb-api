@@ -1,6 +1,6 @@
 package com.certh.spring.data.mongodb.security.services;
 
-import com.certh.spring.data.mongodb.model.User;
+import com.certh.spring.data.mongodb.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
 import java.util.List;

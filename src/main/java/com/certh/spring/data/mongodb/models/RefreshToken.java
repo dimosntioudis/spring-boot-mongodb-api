@@ -1,4 +1,4 @@
-package com.certh.spring.data.mongodb.model;
+package com.certh.spring.data.mongodb.models;
 
 import java.time.Instant;
 import org.springframework.data.annotation.Id;
