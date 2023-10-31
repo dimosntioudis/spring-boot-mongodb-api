@@ -14,19 +14,29 @@ public class Annotation {
   private String description;
   private String dropdownValue;
   private String videoId;
+  private String userId;
 
   public Annotation() {
 
   }
 
   public Annotation(Rectangle rectangle, Long frameNumber, Double second,
-      String description, String dropdownValue, String videoId) {
+      String description, String dropdownValue, String videoId, String userId) {
     this.rectangle = rectangle;
     this.frameNumber = frameNumber;
     this.second = second;
     this.description = description;
     this.dropdownValue = dropdownValue;
     this.videoId = videoId;
+    this.userId = userId;
+  }
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
   }
 
   public String getVideoId() {

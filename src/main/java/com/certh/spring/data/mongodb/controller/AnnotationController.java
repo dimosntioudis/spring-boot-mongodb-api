@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -27,11 +28,17 @@ public class AnnotationController {
   AnnotationRepository annotationRepository;
 
   @GetMapping("/annotations")
-  public ResponseEntity<List<Annotation>> getAllAnnotations() {
+  public ResponseEntity<List<Annotation>> getAllAnnotations(
+      @RequestParam(required = false) String videoId,
+      @RequestParam(required = false) String userId) {
     try {
       List<Annotation> annotations = new ArrayList<Annotation>();
 
-      annotationRepository.findAll().forEach(annotations::add);
+      if (videoId == null && userId == null) {
+        annotationRepository.findAll().forEach(annotations::add);
+      } else {
+        annotationRepository.findByVideoIdAndUserId(videoId, userId).forEach(annotations::add);
+      }
 
       if (annotations.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -59,7 +66,8 @@ public class AnnotationController {
     try {
       Annotation _annotations = annotationRepository.save(
           new Annotation(annotation.getRectangle(), annotation.getFrameNumber(),
-              annotation.getSecond(), annotation.getDescription(), annotation.getDropdownValue(), annotation.getVideoId()));
+              annotation.getSecond(), annotation.getDescription(), annotation.getDropdownValue(),
+              annotation.getVideoId(), annotation.getUserId()));
       return new ResponseEntity<>(_annotations, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,6 +86,8 @@ public class AnnotationController {
       _annotation.setSecond(annotation.getSecond());
       _annotation.setDescription(annotation.getDescription());
       _annotation.setDropdownValue(annotation.getDropdownValue());
+      _annotation.setVideoId(annotation.getVideoId());
+      _annotation.setUserId(annotation.getUserId());
 
       return new ResponseEntity<>(annotationRepository.save(_annotation), HttpStatus.OK);
     } else {
