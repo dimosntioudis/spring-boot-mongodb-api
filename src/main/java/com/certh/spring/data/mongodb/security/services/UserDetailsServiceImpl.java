@@ -1,6 +1,6 @@
 package com.certh.spring.data.mongodb.security.services;
 
-import com.certh.spring.data.mongodb.model.User;
+import com.certh.spring.data.mongodb.models.User;
 import com.certh.spring.data.mongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

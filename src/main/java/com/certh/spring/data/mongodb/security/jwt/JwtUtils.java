@@ -1,6 +1,6 @@
 package com.certh.spring.data.mongodb.security.jwt;
 
-import com.certh.spring.data.mongodb.model.User;
+import com.certh.spring.data.mongodb.models.User;
 import com.certh.spring.data.mongodb.security.services.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

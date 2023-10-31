@@ -1,6 +1,6 @@
 package com.certh.spring.data.mongodb.repository;
 
-import com.certh.spring.data.mongodb.model.User;
+import com.certh.spring.data.mongodb.models.User;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

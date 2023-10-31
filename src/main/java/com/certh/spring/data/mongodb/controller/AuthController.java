@@ -1,10 +1,10 @@
 package com.certh.spring.data.mongodb.controller;
 
 import com.certh.spring.data.mongodb.exception.TokenRefreshException;
-import com.certh.spring.data.mongodb.model.ERole;
-import com.certh.spring.data.mongodb.model.RefreshToken;
-import com.certh.spring.data.mongodb.model.Role;
-import com.certh.spring.data.mongodb.model.User;
+import com.certh.spring.data.mongodb.models.ERole;
+import com.certh.spring.data.mongodb.models.RefreshToken;
+import com.certh.spring.data.mongodb.models.Role;
+import com.certh.spring.data.mongodb.models.User;
 import com.certh.spring.data.mongodb.payload.request.LoginRequest;
 import com.certh.spring.data.mongodb.payload.request.SignupRequest;
 import com.certh.spring.data.mongodb.payload.response.MessageResponse;
