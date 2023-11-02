@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:63342", maxAge = 3600, allowCredentials="true")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/test")
 public class AnnotationController {
 
   private final AnnotationRepository annotationRepository;
@@ -38,7 +38,6 @@ public class AnnotationController {
   }
 
   @GetMapping("/annotations")
-  @PreAuthorize("hasRole('TRAINER') or hasRole('TRAINEE') or hasRole('ADMIN')")
   public ResponseEntity<List<Annotation>> getAllAnnotations(
       @RequestParam() String videoId) {
 
@@ -65,7 +64,6 @@ public class AnnotationController {
   }
 
   @GetMapping("/annotations/{id}")
-  @PreAuthorize("hasRole('TRAINER') or hasRole('TRAINEE') or hasRole('ADMIN')")
   public ResponseEntity<Annotation> getAnnotationById(@PathVariable("id") String id) {
     String userId = annotationService.findLoggedInUser();
 
@@ -81,7 +79,6 @@ public class AnnotationController {
   }
 
   @PostMapping("/annotations")
-  @PreAuthorize("hasRole('TRAINER') or hasRole('TRAINEE') or hasRole('ADMIN')")
   public ResponseEntity<Annotation> createAnnotation(@RequestBody Annotation annotation) {
     try {
       Annotation _annotation = annotationService.createAnnotation(annotation);
@@ -93,7 +90,6 @@ public class AnnotationController {
   }
 
   @PutMapping("/annotations/{id}")
-  @PreAuthorize("hasRole('TRAINER') or hasRole('TRAINEE') or hasRole('ADMIN')")
   public ResponseEntity<Annotation> updateAnnotation(@PathVariable("id") String id,
       @RequestBody Annotation annotation) {
     String userId = annotationService.findLoggedInUser();
@@ -118,7 +114,6 @@ public class AnnotationController {
   }
 
   @DeleteMapping("/annotations/{id}")
-  @PreAuthorize("hasRole('TRAINER') or hasRole('TRAINEE') or hasRole('ADMIN')")
   public ResponseEntity<HttpStatus> deleteAnnotation(@PathVariable("id") String id) {
     String userId = annotationService.findLoggedInUser();
 
@@ -139,7 +134,6 @@ public class AnnotationController {
   }
 
   @DeleteMapping("/annotations")
-  @PreAuthorize("hasRole('TRAINER') or hasRole('TRAINEE') or hasRole('ADMIN')")
   public ResponseEntity<HttpStatus> deleteAllAnnotations(@RequestParam(required = false) String videoId) {
     String userId = annotationService.findLoggedInUser();
 
