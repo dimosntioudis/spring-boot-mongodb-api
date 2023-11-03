@@ -1,15 +1,25 @@
 package com.certh.spring.data.mongodb.payload.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import java.util.Set;
 
-public class SignupRequest {
+import jakarta.validation.constraints.*;
 
+public class SignupRequest {
   @NotBlank
   @Size(min = 3, max = 20)
   private String username;
+
+  @NotBlank
+  @Size(min = 3, max = 20)
+  private String firstname;
+
+  @NotBlank
+  @Size(min = 3, max = 20)
+  private String lastname;
+
+  @NotBlank
+  @Size(min = 3, max = 20)
+  private String country;
 
   @NotBlank
   @Size(max = 50)
@@ -21,6 +31,30 @@ public class SignupRequest {
   @NotBlank
   @Size(min = 6, max = 40)
   private String password;
+
+  public String getFirstname() {
+    return firstname;
+  }
+
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
+  }
+
+  public String getLastname() {
+    return lastname;
+  }
+
+  public void setLastname(String lastname) {
+    this.lastname = lastname;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
 
   public String getUsername() {
     return username;
