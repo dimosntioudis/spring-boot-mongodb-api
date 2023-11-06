@@ -101,13 +101,8 @@ public class AnnotationController {
           "You do not have permission to modify Annotation with id = " + id);
     }
 
-    _annotation.setRectangle(annotation.getRectangle());
-    _annotation.setFrameNumber(annotation.getFrameNumber());
-    _annotation.setSecond(annotation.getSecond());
     _annotation.setDescription(annotation.getDescription());
     _annotation.setDropdownValue(annotation.getDropdownValue());
-    _annotation.setVideoId(annotation.getVideoId());
-    _annotation.setUserId(userId);
 
     return new ResponseEntity<>(annotationRepository.save(_annotation), HttpStatus.OK);
   }
