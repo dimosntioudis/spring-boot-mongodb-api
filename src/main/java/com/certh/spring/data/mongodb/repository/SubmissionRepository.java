@@ -9,5 +9,7 @@ public interface SubmissionRepository extends MongoRepository<Submission, String
 
   Iterable<Submission> findByUserId(String userId);
 
+  Iterable<Submission> findByCountry(String country);
+
   void deleteByUserId(String userId);
 }

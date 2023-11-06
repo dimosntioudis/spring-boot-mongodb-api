@@ -39,11 +39,11 @@ public class SubmissionController {
     try {
       List<Submission> submissions = new ArrayList<>();
 
-      if (authorities.toString().contains("ROLE_TRAINER")) {
+      if (authorities.toString().contains("ROLE_TRAINEE")) {
         String userId = submissionService.findLoggedInUserId();
         submissionRepository.findByUserId(userId).forEach(submissions::add);
       } else {
-        submissionRepository.findAll().forEach(submissions::add);
+        submissions = submissionService.findSubmissionsByTrainerCountry();
       }
 
       if (submissions.isEmpty()) {

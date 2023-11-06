@@ -12,6 +12,10 @@ public class Submission {
   private String userId;
   private String username;
 
+  private String firstName;
+  private String lastName;
+  private String country;
+
   private String videoId;
   private String videoTitle;
 
@@ -24,13 +28,40 @@ public class Submission {
   }
 
   public Submission(String userId, String username, String videoId, String videoTitle,
-      List<String> annotationIds, String status) {
+      List<String> annotationIds, String status, String firstName, String lastName, String country) {
     this.userId = userId;
     this.username = username;
     this.videoId = videoId;
     this.videoTitle = videoTitle;
     this.annotationIds = annotationIds;
     this.status = status;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.country = country;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
   }
 
   public String getStatus() {
