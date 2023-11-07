@@ -2,6 +2,7 @@ package com.certh.spring.data.mongodb.controller;
 
 import com.certh.spring.data.mongodb.exception.ResourceNotFoundException;
 import com.certh.spring.data.mongodb.exception.ResourceOwnershipException;
+import com.certh.spring.data.mongodb.models.Annotation;
 import com.certh.spring.data.mongodb.models.Submission;
 import com.certh.spring.data.mongodb.repository.SubmissionRepository;
 import com.certh.spring.data.mongodb.security.services.SubmissionService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -76,6 +78,17 @@ public class SubmissionController {
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  @PutMapping("/submissions/{id}")
+  public ResponseEntity<Submission> updateSubmission(@PathVariable("id") String id,
+      @RequestBody Submission submission) {
+    Submission _submission = submissionRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Not found Annotation with id = " + id));
+
+    _submission.setStatus(submission.getStatus());
+
+    return new ResponseEntity<>(submissionRepository.save(_submission), HttpStatus.OK);
   }
 
   @DeleteMapping("/submissions/{id}")
