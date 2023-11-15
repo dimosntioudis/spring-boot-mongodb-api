@@ -63,6 +63,17 @@ public class SubmissionService {
     return submissions;
   }
 
+  /* Return Submissions based on Trainer's country and Status */
+  public List<Submission> findSubmissionsByTrainerCountryAndStatus(String status) {
+    String userId = findLoggedInUserId();
+    Optional<User> user = userRepository.findById(userId);
+
+    List<Submission> submissions = new ArrayList<>();
+    submissionRepository.findByCountryAndStatus(user.get().getCountry(), status).forEach(submissions::add);
+
+    return submissions;
+  }
+
   public Submission createSubmission(Submission submission) {
 
     String userId = findLoggedInUserId();

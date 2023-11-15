@@ -20,6 +20,7 @@ public class Submission {
   private String videoTitle;
 
   private String status;
+  private String evaluation;
 
   private List<String> annotationIds;
 
@@ -27,17 +28,12 @@ public class Submission {
 
   }
 
-  public Submission(String userId, String username, String videoId, String videoTitle,
-      List<String> annotationIds, String status, String firstName, String lastName, String country) {
-    this.userId = userId;
-    this.username = username;
-    this.videoId = videoId;
-    this.videoTitle = videoTitle;
-    this.annotationIds = annotationIds;
-    this.status = status;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.country = country;
+  public String getEvaluation() {
+    return evaluation;
+  }
+
+  public void setEvaluation(String evaluation) {
+    this.evaluation = evaluation;
   }
 
   public String getFirstName() {
