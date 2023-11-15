@@ -14,9 +14,7 @@ public class AnnotationService {
     return userId;
   }
 
-  public Annotation createAnnotation(Annotation annotation) {
-    String userId = findLoggedInUser();
-
+  public Annotation createAnnotation(Annotation annotation, String userId) {
     Annotation _annotation = new Annotation();
 
     _annotation.setUserId(userId);
@@ -26,6 +24,9 @@ public class AnnotationService {
     _annotation.setDescription(annotation.getDescription());
     _annotation.setDropdownValue(annotation.getDropdownValue());
     _annotation.setVideoId(annotation.getVideoId());
+    _annotation.setComment(annotation.getComment());
+    _annotation.setEvaluation(annotation.isEvaluation());
+    _annotation.setColor(annotation.getColor());
 
     return _annotation;
   }

@@ -16,19 +16,35 @@ public class Annotation {
   private String videoId;
   private String userId;
 
-  public Annotation() {
+  /* The score of the trainer */
+  private boolean evaluation;
+  private String comment = "";
 
+  /* The color of the annotation */
+  private String color = "red";
+
+  public String getColor() {
+    return color;
   }
 
-  public Annotation(Rectangle rectangle, Long frameNumber, Double second,
-      String description, String dropdownValue, String videoId, String userId) {
-    this.rectangle = rectangle;
-    this.frameNumber = frameNumber;
-    this.second = second;
-    this.description = description;
-    this.dropdownValue = dropdownValue;
-    this.videoId = videoId;
-    this.userId = userId;
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public boolean isEvaluation() {
+    return evaluation;
+  }
+
+  public void setEvaluation(boolean evaluation) {
+    this.evaluation = evaluation;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
   }
 
   public String getUserId() {

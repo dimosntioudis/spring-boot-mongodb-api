@@ -38,9 +38,14 @@ public class AnnotationController {
 
   @GetMapping("/annotations")
   public ResponseEntity<List<Annotation>> getAllAnnotations(
-      @RequestParam() String videoId) {
+      @RequestParam() String videoId, @RequestParam(required = false) String id) {
 
-    String userId = annotationService.findLoggedInUser();
+    String userId;
+    if (id == null) {
+      userId = annotationService.findLoggedInUser();
+    } else {
+      userId = id;
+    }
 
     try {
       List<Annotation> annotations = new ArrayList<>();
@@ -55,7 +60,6 @@ public class AnnotationController {
       if (annotations.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-
       return new ResponseEntity<>(annotations, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,11 +82,26 @@ public class AnnotationController {
   }
 
   @PostMapping("/annotations")
-  public ResponseEntity<Annotation> createAnnotation(@RequestBody Annotation annotation) {
+  public ResponseEntity<List<Annotation>> createAnnotation(
+      @RequestBody List<Annotation> annotations, @RequestParam(required = false) String id) {
+
+    String userId;
+    if (id == null) {
+      userId = annotationService.findLoggedInUser();
+    } else {
+      userId = id;
+    }
+
     try {
-      Annotation _annotation = annotationService.createAnnotation(annotation);
-      _annotation = annotationRepository.save(_annotation);
-      return new ResponseEntity<>(_annotation, HttpStatus.CREATED);
+      List<Annotation> createdAnnotations = new ArrayList<>();
+
+      for (Annotation annotation : annotations) {
+        Annotation createdAnnotation = annotationService.createAnnotation(annotation, userId);
+        createdAnnotation = annotationRepository.save(createdAnnotation);
+        createdAnnotations.add(createdAnnotation);
+      }
+
+      return new ResponseEntity<>(createdAnnotations, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -96,28 +115,31 @@ public class AnnotationController {
     Annotation _annotation = annotationRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Not found Annotation with id = " + id));
 
-    if (!_annotation.getUserId().contentEquals(userId)) {
-      throw new ResourceOwnershipException(
-          "You do not have permission to modify Annotation with id = " + id);
-    }
+//    if (!_annotation.getUserId().contentEquals(userId)) {
+//      throw new ResourceOwnershipException(
+//          "You do not have permission to modify Annotation with id = " + id);
+//    }
 
     _annotation.setDescription(annotation.getDescription());
     _annotation.setDropdownValue(annotation.getDropdownValue());
+    _annotation.setComment(annotation.getComment());
+    _annotation.setEvaluation(annotation.isEvaluation());
 
     return new ResponseEntity<>(annotationRepository.save(_annotation), HttpStatus.OK);
   }
 
   @DeleteMapping("/annotations/{id}")
   public ResponseEntity<HttpStatus> deleteAnnotation(@PathVariable("id") String id) {
-    String userId = annotationService.findLoggedInUser();
+//    String userId = annotationService.findLoggedInUser();
 
     Annotation _annotation = annotationRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Not found Annotation with id = " + id));
 
-    if (!_annotation.getUserId().contentEquals(userId)) {
-      throw new ResourceOwnershipException(
-          "You do not have permission to modify Annotation with id = " + id);
-    }
+//    Added comment so that the trainer can also delete an annotation.
+//    if (!_annotation.getUserId().contentEquals(userId)) {
+//      throw new ResourceOwnershipException(
+//          "You do not have permission to modify Annotation with id = " + id);
+//    }
 
     try {
       annotationRepository.deleteById(id);
