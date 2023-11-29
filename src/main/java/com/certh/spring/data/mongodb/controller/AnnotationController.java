@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:63342", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("/api/test")
 public class AnnotationController {
@@ -120,10 +119,21 @@ public class AnnotationController {
 //          "You do not have permission to modify Annotation with id = " + id);
 //    }
 
-    _annotation.setDescription(annotation.getDescription());
-    _annotation.setDropdownValue(annotation.getDropdownValue());
-    _annotation.setComment(annotation.getComment());
-    _annotation.setEvaluation(annotation.isEvaluation());
+    if (annotation.getDescription() != null) {
+      _annotation.setDescription(annotation.getDescription());
+    }
+
+    if (annotation.getDropdownValue() != null) {
+      _annotation.setDropdownValue(annotation.getDropdownValue());
+    }
+
+    if (annotation.getComment() != null) {
+      _annotation.setComment(annotation.getComment());
+    }
+
+    if (annotation.isEvaluation()) {
+      _annotation.setEvaluation(annotation.isEvaluation());
+    }
 
     return new ResponseEntity<>(annotationRepository.save(_annotation), HttpStatus.OK);
   }
